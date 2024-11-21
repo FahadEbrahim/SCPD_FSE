@@ -10,6 +10,7 @@ The requirements and packages are listed in [`requirements.txt`](requirements.tx
 ## Dataset
 
 The dataset is available in the `dataset` folder. It has two versions: 1 (raw) and 2 (template-free). The files are in .csv format.
+
 The dataset is called ConPlag. All the credit goes to the authors, the [paper](https://arxiv.org/abs/2303.10763) and the [dataset](https://zenodo.org/records/7332790) are available here. 
 In this work, the dataset was split into 70%,15%,15% for training, validation and testing respectively. 
 
@@ -33,11 +34,11 @@ The arguments are:
 - tune_type: Whether to fft or peft.
 - adapter_type: The adapter to be trained and merged. Choices are: [ "houlsby", "pfeiffer", "lora", "ia3", "parallel", "prefixtuning"]
 - report. The default is none. Another choice is the wandb.
-Other parameters are availble on the parse_arguments function within the run_scpd.py file. 
+Other parameters are available on the [parse_arguments](https://github.com/FahadEbrahim/SCPD_FSE/blob/f45229ffadb41c04fd09b93558650d21ae4945f4/run_scpd.py#L40) function within the `run_scpd.py` file. 
 
 There are two other scripts:
-1. `scripts/run_all_full.sh`: Runs the Full Fine-Tuning (FFT) on all models for a single dataset version.
-2. `scripts/run_all_adapters.sh`: Runs all adapters on all models for a single dataset version.
+1. `scripts/run_all_full.sh`: Runs the Full Fine-Tuning (FFT) on all models for both versions.
+2. `scripts/run_all_adapters.sh`: Runs all adapters on all models for both dataset versions.
 
 ## The full results
 The full results of all experiments are available on `results/results.csv`. 
