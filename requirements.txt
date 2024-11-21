@@ -1,0 +1,10 @@
+pandas==2.2.3
+matplotlib==3.9.2
+wandb==0.18.7
+pynvml==11.5.3
+scikit-learn==1.5.2
+datasets==3.1.0
+evaluate==0.4.3
+sentencepiece==0.2.0
+accelerate==1.1.1
+adapters==1.0.1
