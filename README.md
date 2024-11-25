@@ -20,11 +20,11 @@ The main code is available at `run_scpd.py`. To run the Python script:
 A sample run: (available at `scripts/run_exp.sh`)
 
 ```shell
-python run_scpd.py --epoch 10 --seed 42 --batch_size 32 --max_seq_length 512 --dataset_version 1 --learning_rate 1e-4 --model_name codeberta --tune_type peft --adapter_type lora --report wandb
+python run_scpd.py --epoch 10 --seed 42 --batch_size 32 --max_seq_length 512 --dataset_version 1 --learning_rate 5e-4 --model_name codeberta --tune_type peft --adapter_type lora --report wandb
 ```
 
 The arguments are:
-- Epoch: The number of epochs. The default is 50.
+- Epoch: The number of epochs. The default is 30.
 - seed: For randomization. The default is 42.
 - batch_size: The batch size. The default is 16.
 - max_seq_length: The maximum sequence length for the tokenizer. The default is 512.
@@ -32,8 +32,8 @@ The arguments are:
 - learning_rate: The learning rate to be used. The default is 5e-4
 - model_name: The model name to be selected. Choices are: [ "codebert", "graphcodebert", "unixcoder", "codeberta", "codet5", "plbart" ]
 - tune_type: Whether to fft or peft.
-- adapter_type: The adapter to be trained and merged. Choices are: [ "houlsby", "pfeiffer", "lora", "ia3", "parallel", "prefixtuning"]
-- report. The default is none. Another choice is the wandb.
+- adapter_type: The adapter to be trained and merged. Choices are: [ "houlsby", "pfeiffer", "lora"]
+- report: The default is none. Another choice is the wandb.
 Other parameters are available on the [parse_arguments](https://github.com/FahadEbrahim/SCPD_FSE/blob/f45229ffadb41c04fd09b93558650d21ae4945f4/run_scpd.py#L40) function within the `run_scpd.py` file. 
 
 There are two other scripts:
@@ -46,7 +46,7 @@ The logs and results are available on the following [wandb project](https://wand
 
 ### [wandb](https://wandb.ai)
 In case of using wandb for experiment tracking setting report to wandb:
-The Python file requires the API key to be available in a file called `wandb_api.key` to be available in the root directory.
+The Python file requires the API key to be available in the [`wandb_api.key`](wandb_api.key) file to be available in the root directory.
 
 ### Acknowledgement
 This repository used codes and intuitions presented in the following repositories: 
