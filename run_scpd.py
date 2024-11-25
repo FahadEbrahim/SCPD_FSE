@@ -17,24 +17,27 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 import matplotlib
 
+matplotlib.use('Agg')  # Use a backend without GUI dependencies
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 model_choices = {
         "codebert": "microsoft/codebert-base",
         "graphcodebert": "microsoft/graphcodebert-base",
         "unixcoder": "microsoft/unixcoder-base-nine",
-        "codeberta":"huggingface/CodeBERTa-small-v1",
         "codet5": "Salesforce/codet5-small",
         "plbart": "uclanlp/plbart-base",
+        "codeberta":"huggingface/CodeBERTa-small-v1",
+
     }
 
 adapter_choices = {
     "houlsby": DoubleSeqBnConfig(),
     "pfeiffer":SeqBnConfig(),
     "lora":LoRAConfig(),
-    "ia3":IA3Config(),
-    "prefixtuning": PrefixTuningConfig(),
-    "parallel":ParBnConfig(),
+    # "ia3":IA3Config(),
+    # "prefixtuning": PrefixTuningConfig(),
+    # "parallel":ParBnConfig(),
     }
 
 def parse_arguments():
@@ -53,10 +56,12 @@ def parse_arguments():
     parser.add_argument("--push_model", default = False, action="store_true", help = "If added, the model would be pushed to HF")
     parser.add_argument("--save_adapter", default = False, action="store_true", help = "If added, the adapter would be pushed to HF")
     parser.add_argument("--save_model", default = False, action="store_true", help = "If added, the model would be pushed to HF")
-    parser.add_argument("--adapter_drop", default = True, action="store_true", help = "If added, Robust Adapter Drop will be applied")
-    parser.add_argument("--class_weights", default = True, action="store_true", help = "If added, Weighted Loss Function will be used")
-    parser.add_argument("--use_callback", default = True, action="store_true", help = "If added, Early Stopping Callback will be used")
-    parser.add_argument("--pre_process", default = True, action="store_true", help = "If added, the code will be pre-processed")
+    parser.add_argument("--adapter_drop", default = False, action="store_true", help = "If added, Robust Adapter Drop will be applied")
+    parser.add_argument("--class_weights", default = False, action="store_true", help = "If added, Weighted Loss Function will be used")
+    parser.add_argument("--use_callback", default = False, action="store_true", help = "If added, Early Stopping Callback will be used")
+    parser.add_argument("--pre_process", default = False, action="store_true", help = "If added, the code will be pre-processed")
+    parser.add_argument("--ft_metric", type=str, default='loss',help = "Choose the fine tuning type: peft or fft",choices = ["loss","f_beta_score"])
+
 
     return parser.parse_args()
 
@@ -197,7 +202,6 @@ def train_model(args, data_collator,enc_train,enc_test,model_saved_name,model,to
     per_device_train_batch_size=args.batch_size,
     per_device_eval_batch_size=args.batch_size,
     logging_steps=100,
-    #do_eval=True,
     output_dir=model_saved_name + "/",
     overwrite_output_dir=True,
     remove_unused_columns=False,
@@ -210,9 +214,8 @@ def train_model(args, data_collator,enc_train,enc_test,model_saved_name,model,to
     seed=args.seed,
     report_to = args.report,
     load_best_model_at_end=True,
-    #metric_for_best_model = "f_beta_score",
-    #greater_is_better=Fals
-    #include_inputs_for_metrics=True
+    metric_for_best_model = args.ft_metric,
+    greater_is_better= True if args.ft_metric=="f_beta_score" else False
     )
 
     if args.tune_type == "peft":
@@ -256,8 +259,6 @@ def train_model(args, data_collator,enc_train,enc_test,model_saved_name,model,to
 
         if args.adapter_drop:
             trainer.add_callback(AdapterDropTrainerCallback())
-        if args.use_callback:
-            trainer.add_callback(EarlyStoppingCallback(5))
 
     if args.tune_type == "fft":
         if not args.class_weights:
@@ -281,7 +282,7 @@ def train_model(args, data_collator,enc_train,enc_test,model_saved_name,model,to
                 )
 
     if args.use_callback:
-                trainer.add_callback(EarlyStoppingCallback(5))
+            trainer.add_callback(EarlyStoppingCallback(5))
 
     is_show_train_gpu = True;
     train_output = trainer.train()
@@ -329,6 +330,8 @@ def write_to_csv(args,model_saved_name, train_output, pred_output, benchmark,gpu
         'tune_type': args.tune_type,
         'model_name': args.model_name,
         'model_saved_name': model_saved_name,
+        'code_preprocessing': str(args.pre_process),
+        'ft_metric': args.ft_metric,
         **train_output.metrics  
         ,**pred_output,
         **benchmark,
@@ -404,7 +407,7 @@ def main():
     formatted_datetime = current_datetime.strftime("%Y-%m-%d %H-%M-%S")
 
     output_filename = args.model_name +"_" + str(args.dataset_version) + "_" + formatted_datetime + ".csv"
-    model_saved_name = "ConPlag_" + str(args.dataset_version) + "_" + args.model_name + "_ep" + str(args.epochs) + "_bs" + str(args.batch_size) + "_lr" + str(args.learning_rate).replace(".","_") + "_l" + str(args.max_seq_length) + "_s" + str(args.seed)
+    model_saved_name = "ConPlag_" + str(args.dataset_version) + "_" + args.model_name + "_ep" + str(args.epochs) + "_bs" + str(args.batch_size) + "_lr" + str(args.learning_rate).replace(".","_") + "_l" + str(args.max_seq_length) + "_s" + str(args.seed) + "_pp" + ("y" if args.pre_process else "n") + "_" +args.ft_metric
 
     if args.tune_type == "peft":
         if not args.adapter_type:
@@ -472,9 +475,9 @@ def main():
     param_percentage = (num_param / num_total_param) * 100
 
     model_size = get_model_size(model, required=False)
-    
-    if args.save_adapter or args.save_model:
-        model_size = round(sum(p.stat().st_size for p in Path(model_saved_name).rglob('*')) / (1024 * 1024),2)
+
+    if args.tune_type == "peft":
+                model_size = round(sum(p.stat().st_size for p in Path(model_saved_name).rglob(f'checkpoint*/**/{model_saved_name}/*') if p.is_file()) / (1024 * 1024), 2)
 
     benchmark = { "actual_trainable_param": num_param
                  , "total_trainable_param" : num_total_param,
