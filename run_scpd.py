@@ -11,13 +11,13 @@ import logging
 from pathlib import Path
 import evaluate
 from transformers import TrainingArguments, EvalPrediction, TrainerCallback, DataCollatorWithPadding,set_seed, TextClassificationPipeline,AutoModel,AutoConfig,AutoTokenizer,Trainer,AutoModelForSequenceClassification,EarlyStoppingCallback,pipeline
-from adapters import RobertaAdapterModel,AutoAdapterModel,AdapterTrainer,DoubleSeqBnConfig,SeqBnConfig,LoRAConfig,CompacterConfig,IA3Config,ParBnConfig,SeqBnInvConfig,MAMConfig,UniPELTConfig,DoubleSeqBnInvConfig,PrefixTuningConfig,ConfigUnion,DiReftConfig,LoReftConfig,NoReftConfig
+from adapters import RobertaAdapterModel,AutoAdapterModel,AdapterTrainer,DoubleSeqBnConfig,SeqBnConfig,LoRAConfig
 from sklearn.metrics import classification_report, confusion_matrix,ConfusionMatrixDisplay
 from datetime import datetime
 import matplotlib.pyplot as plt
 import matplotlib
 
-matplotlib.use('Agg')  # Use a backend without GUI dependencies
+#matplotlib.use('Agg')
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -28,21 +28,17 @@ model_choices = {
         "codet5": "Salesforce/codet5-small",
         "plbart": "uclanlp/plbart-base",
         "codeberta":"huggingface/CodeBERTa-small-v1",
-
     }
 
 adapter_choices = {
     "houlsby": DoubleSeqBnConfig(),
     "pfeiffer":SeqBnConfig(),
     "lora":LoRAConfig(),
-    # "ia3":IA3Config(),
-    # "prefixtuning": PrefixTuningConfig(),
-    # "parallel":ParBnConfig(),
     }
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Source code plagiairsm detection")
-    parser.add_argument("--epochs", type=int, default=50, help="Number of epochs.")
+    parser.add_argument("--epochs", type=int, default=30, help="Number of epochs.")
     parser.add_argument("--seed", type=int, default=42, help="Seed value for reproucability")
     parser.add_argument("--batch_size", type=int, default=16, help="Batch Size.")
     parser.add_argument("--max_seq_length", type=int, default=512, help="Maximum sequence length")
@@ -60,7 +56,7 @@ def parse_arguments():
     parser.add_argument("--class_weights", default = False, action="store_true", help = "If added, Weighted Loss Function will be used")
     parser.add_argument("--use_callback", default = False, action="store_true", help = "If added, Early Stopping Callback will be used")
     parser.add_argument("--pre_process", default = False, action="store_true", help = "If added, the code will be pre-processed")
-    parser.add_argument("--ft_metric", type=str, default='loss',help = "Choose the fine tuning type: peft or fft",choices = ["loss","f_beta_score"])
+    parser.add_argument("--ft_metric", type=str, default='loss',help = "Choose the fine tuning target whether it's loss of f1.5 score",choices = ["loss","f_beta_score"])
 
 
     return parser.parse_args()
@@ -292,9 +288,7 @@ def train_model(args, data_collator,enc_train,enc_test,model_saved_name,model,to
             gpu_benchmark = show_gpu()
             is_show_train_gpu = False
 
-    if args.tune_type == "peft" and args.adapter_type == "prefixtuning":
-        model.eject_prefix_tuning(model_saved_name)
-    if args.tune_type == "peft" and ( args.adapter_type == "lora" or args.adapter_type == "ia3"):
+    if args.tune_type == "peft" and args.adapter_type == "lora":
         model.merge_adapter(model_saved_name)
 
     pred_output = trainer.evaluate(enc_test,metric_key_prefix="pred")
@@ -492,7 +486,6 @@ def main():
     logger.info("Benchmark")
     logger.info(benchmark)
     write_to_csv(args,model_saved_name,train_output, pred_output,benchmark,gpu_benchmark,output_filename)
-
 
 if __name__ == "__main__":
     main()
