@@ -211,7 +211,7 @@ public class Main {
     }
 
 }
-",1,"similar main code with variable change, changing the order of few lines, in a slightly larger code, additional code."
+",1,"(L2, L3) similar main code with variable change, changing the order of few lines, in a slightly larger code, additional code."
 3dd65549,c1638a45,"import java.util.*;
 import java.io.*;
 
@@ -636,7 +636,7 @@ public class Main {
         }
     }
 }
-",1,"Similar code with variable name change within a slightly larger code, change while to for. "
+",1,"(L2, L5) Similar code with variable name change within a slightly larger code, change while to for. "
 05f939b3,e647bef7,"
 //package cf;
 import java.io.*;
@@ -1573,7 +1573,7 @@ public class Main {
 			return Double.parseDouble(next());
 		}
 	}
-} ",1,"Code reuse with variable change,extra comments. "
+} ",1,"(L1, L2) Code reuse with variable change,extra comments. "
 643e22cc,bd7281dc,"import java.io.*;
 import java.util.*;
 
@@ -1903,7 +1903,7 @@ public class A734C {
         }
     }
 }
-",1,"Variable name change, switch the location of lines, change single while for for, within a slightly larger code"
+",1,"(L2, L3, L5) Variable name change, switch the location of lines, change single while for for, within a slightly larger code"
 28c2d81a,48c5f745,"
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -2154,7 +2154,7 @@ public class E {
 
 }
 
-",1,"Similar main function, variable renaming, splitting/combining lines, slightly larger file, different imports"
+",1,"(L2, L3) Similar main function, variable renaming, splitting/combining lines, slightly larger file, different imports"
 1ea771ea,ee270b2a,"
 import java.io.*;
 import java.util.*;
@@ -2342,7 +2342,7 @@ public class D{
         }
     }
 }
-",1,"Similar main function, variable renaming, additional comments, slightly larger code"
+",1,"(L1, L2) Similar main function, variable renaming, additional comments, slightly larger code"
 4e28b45e,d7a8434f,"import java.util.*;
 import java.io.*;
 public class C {
@@ -3767,7 +3767,7 @@ public class Solve{
           System.out.println(ans);
         }
     }
-}",1,"Similar main with variable renaming, additional lines, different imports, within a slightly larger code. "
+}",1,"(L2, L3) Similar main with variable renaming, additional lines, different imports, within a slightly larger code. "
 cdb801a1,ed610dc9,"//package codeforces;	
 import java.io.*;
 import java.util.*;
@@ -6330,7 +6330,7 @@ public class d {
     public static void main(String[] args) {
         (new d()).solve();
     }
-}",1,"Similar code with variable renaming, function renaming."
+}",1,"(L2, L4) Similar code with variable renaming, function renaming."
 0fd5b95a,41e72d4f,"//package codeforces;
 import java.io.PrintWriter;
 import java.util.*;
@@ -6604,7 +6604,7 @@ public class Main {
         }
     }
 }
-",1,"similar main code with variable renaming, combing/splitting lines. Within a large code. Many comments"
+",1,"(L1, L2, L3) similar main code with variable renaming, combing/splitting lines. Within a large code. Many comments"
 80881cae,ad4c7a20,"//package Codeforces;
 import java.io.*;
 import java.util.*;
@@ -7249,7 +7249,7 @@ public class Practice
 
 
 
-",1,Code reuse with variable renaming in a function.
+",1,"(L1, L2,L4) Code reuse with variable renaming in a function. More comments."
 4241f473,4685c420,"import java.io.*;
 import java.util.*;
 
@@ -7705,7 +7705,7 @@ public class Main
 	
 }
 
-",1,Code reuse with variable change within a larger code
+",1,(L2) Code reuse with variable change within a larger code
 22dff786,624529000,"import java.util.*;
 
 public class Solution {
@@ -7950,7 +7950,7 @@ public class Main
 	}
 }
 
-",1,"similar code with variable renaming, additional lines, different imports."
+",1,"(L2) similar code with variable renaming, additional lines, different imports."
 2eb89317,d4a3869e,"import java.util.*;
 import java.io.*;
 
@@ -8390,7 +8390,7 @@ public class contestA {
     }
 }
 
-",1,"similar main code, changing a single while for for, different imports"
+",1,"(L2, L5) similar main code, changing a single while for for, different imports"
 bdfe8110,fadc1365,"import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8581,7 +8581,7 @@ public class a{
     	}
     }
 }
-",1,"Similar code reuse in main and sort function, with additional code in a larger code"
+",1,"(L2) Similar code reuse in main and sort function, with additional code in a larger code. Variable renaming. Different imports."
 9e7551da,f0e13442,"import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -9374,7 +9374,7 @@ public final class Main {
             return str;
         }
     }
-}",1,"Similar code within functions of different names, in two large codes. Extra spacing, different imports"
+}",1,"(L1, L2, L4) Similar code within functions of different names, in two large codes. Extra spacing, different imports"
 00c0b82a,1ea771ea,"import java.util.*;
 public class E1547 {
     public static void main(String[] args){
@@ -10305,7 +10305,7 @@ class pair{
 		this.val = val;
 		this.c = c;
 	}
-}",1,Similar function code with variable renaming within a large code. Combining and splitting lines.
+}",1,"(L1, L2) Similar function code with variable renaming within a large code. Combining and splitting lines. Different spacing."
 13441e8f,2ebeae13,"import java.util.*;
 
 public class Armchairs {
@@ -11673,7 +11673,7 @@ public class C{
             return Long.parseLong(nextToken());
         }
     }
-}",1,similar function code with variable renaming within a large code.
+}",1,"(L1, L2) similar function code with variable renaming within a large code."
 04ed33a5,7ea34254,"import java.util.Scanner;
 
 public class Subsequence {
@@ -13020,7 +13020,7 @@ public class Main {
 
 		pw.close();
   }
-}",1,"Small code reuse with variable change in a huge code, different imports"
+}",1,"(L1, L2) Small code reuse with variable change in a huge code, different imports. Extra comments."
 ccc8ef27,f7a0ea6d,"import java.util.*;
 public class Sol
 {
@@ -16383,7 +16383,7 @@ public class ss
 }
 }
 
-",1,EM-Nearly
+",1,(L1) Exact code with different spacing.
 d221162a,ee4f7b06,"import java.util.*;
 import java.io.*;
 
@@ -16887,7 +16887,7 @@ public class Codechef{
 	    System.out.println();
 	}
 }
-",1,Similar function code with variable rename within a larger code
+",1,(L2) Similar function code with variable rename within a larger code
 086f0f90,4a570de6,"import java.io.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17273,7 +17273,7 @@ public class D {
 		}
 		System.out.println(dp[o.size()][e.size()]);
 	}
-}",1,"EM Nearly, one variable change"
+}",1,"(L2) EM Nearly, one variable change"
 73f57af1,9a20c823,"/*input
 3
 2
@@ -18153,7 +18153,7 @@ public class D {
         }
     }
 }
-",1,"similar main code with variable renaming, different imports, additional lines"
+",1,"(L1, L2) similar main code with variable renaming, different imports, additional lines. Extra comments."
 d1cd194e,dbffab11,"import java.util.*;
 
 import java.lang.*;
@@ -20227,7 +20227,7 @@ public class Practice {
     }
 }
 
-",1,"similar main code with variable renaming, different imports, additional lines"
+",1,"(L2) similar main code with variable renaming, different imports, additional lines"
 ee270b2a,fc80cbe0,"import java.util.*;
 
 public class D{
@@ -21623,7 +21623,7 @@ public class MyClass {
      System.out.println(dp[lt1.size()][lt0.size()]);
      
     }
-}",1,"Code reuse with variable change, combining lines"
+}",1,"(L2) Code reuse with variable change, combining lines"
 680ba922,6e207cbf,"import java.util.*;
 import java.io.*;
 
@@ -23250,7 +23250,7 @@ public class test3 {
 
 
 
-",1,"similar main function with variable renaming, additional code, different imports"
+",1,"(L2) similar main function with variable renaming, additional code, different imports"
 ae4d5b49,f665e87b,"import java.io.*;
 import java.util.*;
 
@@ -25827,7 +25827,7 @@ public final class Main {
     }
 
 }
-",1,Code Reuse with variable renaming within a larger code
+",1,(L2) Code Reuse with variable renaming within a larger code
 f229aa7f,fcc7e8fa,"import java.util.*;
 import java.io.*;
 import java.math.*;
@@ -26225,7 +26225,7 @@ public class Codeforces {
 		}
 	}
 }
-",1,"Similar code with variable name change, different imports slightly"
+",1,"(L2) Similar code with variable name change, different imports slightly"
 2120328e,b790ef12,"/*****  --->         :)    Vijender  Srivastava      (:       <---       *****/
 import java.util.*;
 import java.lang.*;
@@ -26644,7 +26644,7 @@ public class Main {
         out.flush();
     }
 }
-",1,"similar main code with variable renaming, additional lines ,additional one import"
+",1,"(L1,L2) similar main code with variable renaming, additional lines ,additional one import. More comments."
 ac144188,e899614e,"import java.util.*;
 import java.io.*;
 import static java.lang.Math.min;
@@ -27591,7 +27591,7 @@ public class D {
         }
     }
 }
-",1,"Code Reuse with variable renaming, additional code"
+",1,"(L1, L2) Code Reuse with variable renaming, additional code and comments."
 43b85d63,a37923d1,"import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29032,7 +29032,7 @@ public class Main {
     	 }
     	 System.out.println(sb);
 	}
-}",1,Similar Code with variable name change.
+}",1,(L3) Similar Code with variable name change.
 c9159d9c,d3a96420,"import java.util.*;
 
 public class SolutionB {
@@ -29905,7 +29905,7 @@ public class CodeChef {
 		
 	}
 }
-",1,"Similar function code with variable renaming and function renaming, different imports."
+",1,"(L1, L2, L4) Similar function code with variable renaming and function renaming, different imports."
 7011024d,eea69e7f,"import java.util.*;
 
 public class D {
@@ -30872,7 +30872,7 @@ public class Pupsen {
 	    }
 	}
 }
-",1,"Similar code with variable renaming, having a code in a function"
+",1,"(L2,L3) Similar code with variable renaming, having a code in a function"
 3666e0e8,ac7187d8,"
 import java.io.*;
 import java.lang.*;
@@ -32940,7 +32940,7 @@ public class D {
         }
     }
 }
-",1,"similar code in main with variable change, replace for with while, within a slightly larger code, different imports"
+",1,"(L2, L5) similar code in main with variable change, replace for with while, within a slightly larger code, different imports"
 4303de0d,c9a316ca,"import java.io.*;
 import java.util.*;
 public class ParsasHumongousTree
@@ -33708,7 +33708,7 @@ public class C {
     }
     
 }
-",1,"Similar code with variable renaming, additional code."
+",1,"(L2) Similar code with variable renaming, additional code."
 74b5ad88,dc575a6c,"import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36754,7 +36754,7 @@ public class Practice {
     }
 }
 
-",1,"Similar main, variable name change, different spacing, different imports"
+",1,"(L1, L2) Similar main, variable name change, different spacing, different imports"
 4a1573d6,db8d728d,"
 
 import java.util.*;
