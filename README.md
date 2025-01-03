@@ -42,7 +42,7 @@ There are two other scripts:
 
 ## The full results
 
-The full results of all experiments are available on `results/all_results.csv`. 
+The full results of all experiments are available on a [`csv file`](results/all_results.csv).
 The logs and results are available on the following [wandb project](https://wandb.ai/fahad-ebrahim/ConPlag_Experiments_FSE_Final?nw=nwuserfahadebrahim). 
 
 ## Models and Adapters
