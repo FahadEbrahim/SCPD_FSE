@@ -41,8 +41,13 @@ There are two other scripts:
 2. `scripts/run_all_adapters.sh`: Runs all adapters on all models for both dataset versions.
 
 ## The full results
-The full results of all experiments are available on `results/results.csv`. 
+
+The full results of all experiments are available on `results/all_results.csv`. 
 The logs and results are available on the following [wandb project](https://wandb.ai/fahad-ebrahim/ConPlag_Experiments_FSE_Final?nw=nwuserfahadebrahim). 
+
+## Models and Adapters
+
+The models and adapters are available on [HuggingFace](https://huggingface.co/collections/buelfhood/conplag-experiments-672b66643add81b66a7fb9f2)
 
 ## [wandb](https://wandb.ai)
 
