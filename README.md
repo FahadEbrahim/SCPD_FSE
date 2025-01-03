@@ -1,7 +1,7 @@
-# Classification of Source Code Plagairsm Instances
+# Classification of Source Code Plagiarism Instances
 
 This repository is the source code and results of the paper:
-"The impact of pre-traiend models and adapters for the classification of source code plagairism instances"
+"The impact of pre-trained models and adapters for the classification of source code plagiarism instances"
 
 ## Requirements
 
@@ -42,13 +42,14 @@ There are two other scripts:
 
 ## The full results
 The full results of all experiments are available on `results/results.csv`. 
-The logs and results are available on the following [wandb project](https://wandb.ai/fahad-ebrahim/ConPlag_Experiments_FSE?nw=nwuserfahadebrahim). 
+The logs and results are available on the following [wandb project](https://wandb.ai/fahad-ebrahim/ConPlag_Experiments_FSE_Final?nw=nwuserfahadebrahim). 
 
-### [wandb](https://wandb.ai)
+## [wandb](https://wandb.ai)
+
 In case of using wandb for experiment tracking setting report to wandb:
 The Python file requires the API key to be available in the [`wandb_api.key`](wandb_api.key) file to be available in the root directory.
 
-### Acknowledgement
+## Acknowledgement
 This repository used codes and intuitions presented in the following repositories: 
 1. [Adapters](https://github.com/adapter-hub/adapters) 
 2. [PEFT](https://github.com/zwtnju/PEFT/tree/main)
